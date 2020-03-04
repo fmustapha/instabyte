@@ -1,0 +1,33 @@
+{
+  "name": "instabyte",
+  "version": "1.0.0",
+  "description": "An app that allows users upload images to share with friends and family.",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmustapha/instabyte.git"
+  },
+  "keywords": [
+    "Images",
+    "reactjs",
+    "redux",
+    "mongodb",
+    "mongoose",
+    "nosql",
+    "node",
+    "html5",
+    "css3"
+  ],
+  "author": "Faith Mustapha (Yusuf)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fmustapha/instabyte/issues"
+  },
+  "homepage": "https://github.com/fmustapha/instabyte#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
