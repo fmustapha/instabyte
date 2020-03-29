@@ -1,11 +1,15 @@
 const express = require("express");
+const joi = require("joi");
 const app = express();
-const path = require("path");
-const fs = require("fs");
-const os = require("os");
-const log = require("./logger");
+const log = require("./middleware/logger");
+const auth = require("./middleware/auth");
 
-app.use(express.json());
+app.use(express.json()); // set req.body property
+
+app.use(log);
+app.use(auth);
+
+
 
 const images = [
   { id: 1, name: "myImage", extension: "jpeg" },
