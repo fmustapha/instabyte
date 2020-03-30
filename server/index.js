@@ -1,5 +1,5 @@
 const express = require("express");
-const joi = require("joi");
+const Joi = require("joi");
 const app = express();
 const log = require("./middleware/logger");
 const auth = require("./middleware/auth");
@@ -8,8 +8,6 @@ app.use(express.json()); // set req.body property
 
 app.use(log);
 app.use(auth);
-
-
 
 const images = [
   { id: 1, name: "myImage", extension: "jpeg" },
@@ -32,7 +30,20 @@ app.get("/api/images/:id", (req, res) => {
   return res.send(image);
 });
 
+/** Image Post Route */
 app.post("/api/images", (req, res) => {
+  const schema = {
+    name: Joi.string().min(3).required(),
+    extension: Joi.string()
+  }
+  
+  const result = Joi.validate(req.body, schema)
+  if (result.error) {
+    res
+      .status(400)
+      .send(result.error.details[0].message);
+  }
+
   const image = {
     id: images.length + 1,
     name: req.body.name,
