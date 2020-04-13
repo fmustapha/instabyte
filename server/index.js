@@ -1,3 +1,8 @@
+const startUpDebugging = require('debug')('app:startup');
+const dbDebugger = require('debug')('app:db')
+const config = require("config");
+const helmet = require("helmet");
+const morgan = require("morgan");
 const express = require("express");
 const Joi = require("joi");
 const app = express();
@@ -5,6 +10,15 @@ const log = require("./middleware/logger");
 const auth = require("./middleware/auth");
 
 app.use(express.json()); // set req.body property
+app.use(helmet());
+
+if (app.get("env") === "development") {
+  app.use(morgan("tiny"));
+  startUpDebugging("morgan running...");
+}
+
+//Db Debugging
+dbDebugger('Connecting to the Database...')
 
 app.use(log);
 app.use(auth);
@@ -15,6 +29,7 @@ const images = [
 ];
 
 const port = process.env.PORT || 3000;
+
 app.get("/", (req, res) => {
   res.send("Instabyte is here!");
 });
