@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
-// const cors = require("cors");
-const Joi = require("Joi");
+const cors = require("cors");
 
+var corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
 
-router.get("/", (req, res) => {
+router.get("/", cors(corsOptions), (req, res) => {
   res.send("Instabyte is here!");
 });
 

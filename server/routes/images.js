@@ -1,14 +1,19 @@
 const express = require("express");
 const router = express.Router();
-// const cors = require("cors");
+const cors = require("cors");
 const Joi = require("Joi");
 const images = require("../data/images.json");
 
-router.get("/", (req, res) => {
+var corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
+
+router.get("/", cors(corsOptions), (req, res) => {
   res.send(images);
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", cors(corsOptions), (req, res) => {
   const image = images.find((i) => i.id === parseInt(req.params.id));
   if (!image)
     return res.status(404).send("The image you requested is not found");
@@ -16,7 +21,7 @@ router.get("/:id", (req, res) => {
 });
 
 /** Image Post Route */
-router.post("/", (req, res) => {
+router.post("/", cors(corsOptions), (req, res) => {
   const { error } = validateImage(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -31,7 +36,7 @@ router.post("/", (req, res) => {
   return image;
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", cors(corsOptions), (req, res) => {
   const image = images.find((i) => i.id === parseInt(req.params.id));
   if (!image)
     return res.status(404).send("The image you requested is not found");
@@ -43,7 +48,7 @@ router.put("/:id", (req, res) => {
   res.send(image);
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", cors(corsOptions), (req, res) => {
   const image = images.find((e) => e.id === parseInt(req.params.id));
   if (!image)
     return res.status(404).send("The image you requested is not found");
