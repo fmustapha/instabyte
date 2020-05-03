@@ -1,0 +1,72 @@
+{
+  "name": "instabyte",
+  "version": "1.0.0",
+  "description": "An app that allows users upload images to share with friends and family.",
+  "main": "index.js",
+  "scripts": {
+    "server-test": "npm test",
+    "start": "concurrently --kill-others \"node server\" \"npm run start:react-app\"",
+    "start:react-app": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "custom:build": "nodemon src/scripts/build.js --watch src/data --ext .md",
+    "custom:start": "concurrently --kill-others \"npm run custom:build\" \"npm run start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmustapha/instabyte.git"
+  },
+  "keywords": [
+    "Images",
+    "reactjs",
+    "redux",
+    "mongodb",
+    "mongoose",
+    "nosql",
+    "node",
+    "html5",
+    "css3"
+  ],
+  "author": "Faith Mustapha (Yusuf)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fmustapha/instabyte/issues"
+  },
+  "homepage": "https://github.com/fmustapha/instabyte#readme",
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "concurrently": "^5.2.0",
+    "config": "^3.3.1",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "joi": "^14.3.1",
+    "mongoose": "^5.9.11",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.3",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-scripts": "3.4.0",
+    "react-toastify": "^5.5.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

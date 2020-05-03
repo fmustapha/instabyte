@@ -27,7 +27,7 @@ app.use(auth);
 app.use("/api/images/", images);
 app.use("/", home);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   console.log(`App listening on port http://127.0.0.1:${port}/`);
