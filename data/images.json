@@ -1,0 +1,18 @@
+[
+  {
+    "_id": "5ea65c9010228ffdb2b40114",
+    "name": "myImage",
+    "extension": "jpeg",
+    "author": "Faith",
+    "tags": ["storm", "peace"],
+    "isPublic": true
+  },
+  {
+    "_id": "5ea65c9010228ffdb2b40115",
+    "name": "mine",
+    "extension": "jpg",
+    "author": "Faith",
+    "tags": ["storm", "peace"],
+    "isPublic": false
+  }
+]
