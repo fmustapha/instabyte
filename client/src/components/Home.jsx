@@ -22,8 +22,9 @@ class Home extends Component {
     return (
       <React.Fragment>
         <div className="file-upload">
-          <label htmlFor="image">Choose a picture to upload...</label>
+          <label className="file-label" htmlFor="image">Choose a picture to upload...</label>
           <input
+            className="image-input"
             type="file"
             id="image"
             name="image"
