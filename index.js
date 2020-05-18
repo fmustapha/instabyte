@@ -11,7 +11,7 @@ const auth = require("./middleware/auth");
 const images = require("./routes/images");
 const home = require("./routes/home");
 
-app.use(express.json()); // set req.body property
+// app.use(express.json()); // "set req.body property"  note this gives error with formidable
 app.use(helmet());
 
 if (app.get("env") === "development") {

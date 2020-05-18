@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const formidable = require("formidable");
 const cors = require("cors");
 const Joi = require("Joi");
 const images = require("../data/images.json");
 
-var corsOptions = {
+const corsOptions = {
   origin: "http://localhost:3000",
   optionsSuccessStatus: 200,
 };
+
+router.options("*", cors());
 
 router.get("/", cors(corsOptions), (req, res) => {
   res.send(images);
@@ -21,19 +24,42 @@ router.get("/:id", cors(corsOptions), (req, res) => {
 });
 
 /** Image Post Route */
-router.post("/", cors(corsOptions), (req, res) => {
-  const { error } = validateImage(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+router.post("/", cors(corsOptions), (req, res, next) => {
+  const form = formidable({ multiples: false });
 
-  const image = {
-    id: images.length + 1,
-    name: req.body.name,
-    extension: req.body.extension,
-  };
+  // const { error } = validateImage(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
 
-  images.push(image);
-  res.status(200).send("Upload Successful");
-  return image;
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      next(err);
+      return;
+    }
+
+    const result = { fields, files };
+    const image = {
+      _id: Date.now(),
+      name: result.fields.name,
+      extension: result.fields.extension,
+      author: "",
+      tags: [],
+      isPublic: false
+    };
+
+    images.push(image);
+    res.status(200).json(image);
+    return image;
+  });
+
+  // const image = {
+  //   id: images.length + 1,
+  //   name: req.body.name,
+  //   extension: req.body.extension,
+  // };
+
+  // images.push(image);
+  // res.status(200).send("Upload Successful");
+  // return image;
 });
 
 router.put("/:id", cors(corsOptions), (req, res) => {
