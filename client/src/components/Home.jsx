@@ -14,16 +14,20 @@ class Home extends Component {
 
   handleChange = ({ target }) => {
     console.log(target.value, "details");
-    this.setState({ [target.name]: target.value });
+    this.setState({ [target.name]: target.files[0] });
+    console.log(target.files[0], "file");
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { image } = this.state;
     //prepare image into desired format
-
+    const newImage = {
+      name: image.name,
+      extention: image.type
+    }
     //call another function saveFile() with the file
-    this.saveFile(image);
+    this.saveFile(newImage);
   };
 
   saveFile = async (image) => {
@@ -46,7 +50,7 @@ class Home extends Component {
           <form
             onSubmit={this.handleSubmit}
             method="post"
-            enctype="multipart/form-data"
+            encType="multipart/form-data"
             className="file-upload-form"
           >
             <div className="file-upload-div">
@@ -62,8 +66,8 @@ class Home extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="btn btn-submit">
-              <input id="submit" name="submit" type="submit" />
+            <div className="btn btn-upload">
+              <input id="upload" name="upload" type="submit" value="Upload" />
             </div>
           </form>
         </section>
